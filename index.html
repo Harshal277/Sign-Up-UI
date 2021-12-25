@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Sign Up</title>	
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <header>
+      <span class="logo"><i class="fab fa-wpforms"></i></span>
+      <h1>Sign Up</h1>
+   </header>
+   <main>
+      <section id="regForm">
+         <b class="grey">Start for Free</b>
+         <h2 class="black">Create new account</h2>
+         <span class="grey">Already A Member? <a class="link" href="#">Log In</a></span>
+         <form action="#">
+            <div class="row ">
+               <div class="hgap">
+                  <div class="vertical">
+                     <div class="formCard" id="formName">
+                        <div class="input">
+                           <label for="fname">First Name</label>
+                           <input type="text" onblur="checkEmpty(this, formName, warnFname)" onkeyup="validAlphas(this, formName)" id="fname" placeholder="Harshal">
+                        </div>
+                        <div class="icon">
+                           <i class="fas fa-id-card"></i>
+                        </div>
+                     </div>
+                     <small id="warnFname"></small>
+                  </div>
+               </div>
+               <div class="hgap">
+                  <div class="vertical">
+                     <div class="formCard" id="formLast">
+                        <div class="input">
+                           <label for="lname">Last Name</label>
+                           <input type="text" onblur="checkEmpty(this, formLast, warnLname)" onkeyup="validAlphas(this, formLast)" id="lname" placeholder="Chougule">
+                        </div>
+                        <div class="icon">
+                           <i class="fas fa-id-card"></i>
+                        </div>
+                     </div>
+                     <small id="warnLname"></small>
+                  </div>
+               </div>
+            </div>
+            <div class="vertical">
+               <div class="formCard" id="formUser">
+                  <div class="input">
+                     <label for="user">Username</label>
+                     <input type="text" onkeyup="validUsername(this, formUser, warnUser)" id="user" placeholder="i_m_harshal27">
+                  </div>
+                  <div class="icon">
+                     <i class="fas fa-user"></i>
+                  </div>
+               </div>
+               <small id="warnUser"></small>
+            </div>
+            <div class="vertical">
+               <div class="formCard" id="formEmail">
+                  <div class="input">
+                     <label for="email">Email</label>
+                     <input type="email" onkeyup="validEmail(this, formEmail, warnEmail)" id="email" placeholder="harshalschougule@gmail.com">
+                  </div>
+                  <div class="icon">
+                     <i class="fas fa-envelope"></i>
+                  </div>
+               </div>
+               <small id="warnEmail"></small>
+            </div>
+            <div class="vertical">
+               <div class="formCard" id="formPass">
+                  <div class="input">
+                     <label for="pass">Password</label>
+                     <input type="password" onkeyup="validPassword(this, formPass, warnPass)" id="pass" placeholder="Password">
+                  </div>
+                  <div class="icon">
+                     <span onclick="showhidePass(pass, this)"><i class="fas fa-eye"></i></span>
+                  </div>
+               </div>
+               <small id="warnPass"></small>
+            </div>
+            <button class="primary-button" onclick="callFun(this)" type="button">Create Account</button>
+         </form>
+      </section>
+      <section id="illu">
+         <img src="./assets/illu.svg" alt="Illustration">
+      </section>
+   </main>
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+      var validFields = false;
+      function callFun(){
+         checkValidity();
+      }
+      function showhidePass(ob, icon) {
+         if (ob.type === "password") {
+            ob.type = "text";
+            icon.innerHTML = "<i class='fas fa-eye-slash'></i>";
+         } else {
+            ob.type = "password";
+            icon.innerHTML = "<i class='fas fa-eye'></i>";
+         }
+      }
+      function validAlphas(ob, box){
+         var regEx = /^[a-z][a-z\s]*$/;
+         if(ob.value.match(regEx)){
+            box.style.borderColor = 'transparent'; 
+            validFields = true
+            return true;
+         }else{
+            box.style.borderColor = '#ff0000';
+            validFields = false
+            return false;
+         }
+      }
+      function checkEmpty(ob, box, warn){
+         if(ob.value == ''){
+            box.style.borderColor = '#f9683a';
+            warn.innerText = 'Fill out this Field'
+            validFields = false
+            return false;
+         }else{
+            box.style.borderColor = 'transparent';
+            warn.innerText = ''
+            validFields = true
+            return true;
+         }
+      }
+      function checkValidity(){
+         var fname = document.getElementById("fname").value
+         var lname = document.getElementById("lname").value
+         var user = document.getElementById("user").value
+         var email = document.getElementById("email").value
+         var pass = document.getElementById("pass").value
+         if(fname == '' || lname == '' || user == '' || email == '' || pass == ''){
+            Swal.fire({
+               icon: 'warning',
+               title: 'Empty Fields',
+               text: 'You must have left some field unfilled!',
+            })
+         }else{
+            if(validFields){
+               Swal.fire(
+                  'Good job!',
+                  'You have successfully created your account!',
+                  'success'
+               )
+            }else{
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Please enter valid information in the form!',
+               })
+            }
+         }
+      }
+      function validUsername(ob, box, warn){
+         var validUser = false;
+         if(ob.value == '') {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "This can't be empty";  
+            validUser = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validUser = true;
+         }
+         if(ob.value.search(/[a-z]/i) < 0) {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Username must contain at least 1 letter";  
+            validUser = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validUser = true;
+         } 
+         if(ob.value.search(/[0-9]/) < 0) {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Username must contain at least 1 number";  
+            validUser = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validUser = true;
+         } 
+         if(validUser){  
+            box.style.borderColor = 'transparent';
+            warn.innerHTML = '';
+         }  
+      }
+      function validPassword(ob, box, warn){
+         var validPass = false;
+         if(ob.value == '') {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "This can't be empty";  
+            validPass = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validPass = true;
+         }
+         if(ob.value.length < 8) {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Password length must be atleast 8 characters";  
+            validPass = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validPass = true;
+         }
+         if(ob.value.search(/[a-z]/i) < 0) {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Password must contain at least 1 letter";  
+            validPass = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validPass = true;
+         } 
+         if(ob.value.search(/[0-9]/) < 0) {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Password must contain at least 1 number";  
+            validPass = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validPass = true;
+         } 
+         if(ob.value.search(/[!@#$%^&*]/) < 0) {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Password must contain at least 1 symbol";  
+            validPass = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validPass = true;
+         } 
+         if(validPass){  
+            box.style.borderColor = 'transparent';
+            warn.innerHTML = '';
+         }  
+      }
+      function validEmail(ob, box, warn){
+         var validEmail = false;
+         if(ob.value == '') {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "This can't be empty";  
+            validEmail = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validEmail = true;
+         }
+         if(ob.value.search(/[a-z]/i) < 0) {  
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Email should contain letters also";  
+            validEmail = false;
+            return false;  
+         }else{
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validEmail = true;
+         } 
+         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+         if(ob.value.match(mailformat)) {  
+            warn.innerHTML = "";  
+            box.style.borderColor = 'transparent';
+            validEmail = true;
+         }else{
+            box.style.borderColor = '#f9683a';
+            warn.innerHTML = "Email address is not Valid";  
+            validEmail = false;
+            return false;  
+         } 
+         if(validEmail){  
+            box.style.borderColor = 'transparent';
+            warn.innerHTML = '';
+         }  
+      }
+   </script>
+</body>
+</html>
