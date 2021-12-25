@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Harshal Chougule</h1>
 <h3 align="center">A passionate full stack developer from India</h3>
 
-<p align="left"> <a href="https://instagram.com/i_m_harshal27" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="i_am_harshal27" /></a> </p>
+<p align="left"> <a href="https://instagram.com/i_m_harshal27" target="blank"><img height="30" width="40" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="i_am_harshal27" /></a> </p>
 
 - 👨‍💻 All of my projects are available at [http://harshal-chougule.epizy.com](http://harshal-chougule.epizy.com)
 
